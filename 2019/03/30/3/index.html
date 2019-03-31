@@ -7,17 +7,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://janeswebsite.github.io">
-  <title>record | jane&#39;s blog</title>
+  <title>js测试 | jane&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="hexo博客,珍珍">
-<meta property="og:type" content="website">
-<meta property="og:title" content="record">
-<meta property="og:url" content="http://janeswebsite.github.io/record/index.html">
+  <meta name="description" content="搬运某不认识的大佬的js小程序      async function jianpu(text, duration) {     duration |= 220;      var ctx, xml, data, frequencyRatioTempered, map;     var list = [];      // &amp;#21021;&amp;#22987;&amp;#21270;AudioCont">
+<meta name="keywords" content="测试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js测试">
+<meta property="og:url" content="http://janeswebsite.github.io/2019/03/30/3/index.html">
 <meta property="og:site_name" content="jane&#39;s blog">
+<meta property="og:description" content="搬运某不认识的大佬的js小程序      async function jianpu(text, duration) {     duration |= 220;      var ctx, xml, data, frequencyRatioTempered, map;     var list = [];      // &amp;#21021;&amp;#22987;&amp;#21270;AudioCont">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-29T13:13:07.392Z">
+<meta property="og:updated_time" content="2019-03-31T09:16:44.636Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="record">
+<meta name="twitter:title" content="js测试">
+<meta name="twitter:description" content="搬运某不认识的大佬的js小程序      async function jianpu(text, duration) {     duration |= 220;      var ctx, xml, data, frequencyRatioTempered, map;     var list = [];      // &amp;#21021;&amp;#22987;&amp;#21270;AudioCont">
   
     <link rel="alternative" href="/atom.xml" title="jane&#39;s blog" type="application/atom+xml">
   
@@ -157,27 +160,152 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-3" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      record
+      js测试
     </h1>
   
 
         
-        <a href="/record/index.html" class="archive-article-date">
-  	<time datetime="2019-03-29T13:13:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-29</time>
+        <a href="/2019/03/30/3/" class="archive-article-date">
+  	<time datetime="2019-03-30T15:56:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p></p><p><input id="jianpu2piano" type="text" placeholder="输入数字简谱" value="(6)22#47#46 676#45#43
+(7)335[#1][#1]7655#4(7)#123
+(6)22#47#46 676#45#43
+(7)335[#1][#1]7655#4(7)#132
+7765676 3#4#536 763#4#536
+7653[#1]76765 67#432">　<input type="button" onclick="jianpu(document.getElementById('jianpu2piano').value);" value="play"><br><br>　<br><br>　<br><br>　<br><br>搬运某不认识的大佬的js小程序</p><p></p>
+<script>
+    async function jianpu(text, duration) {
+    duration |= 220;
+
+    var ctx, xml, data, frequencyRatioTempered, map;
+    var list = [];
+
+    // &#21021;&#22987;&#21270;AudioContext
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    ctx = new AudioContext();
+
+    // &#33719;&#21462;&#25351;&#23450;&#38899;&#28304;&#25991;&#20214;&#30340;&#20108;&#36827;&#21046;&#25968;&#25454;
+    xml = new XMLHttpRequest();
+    xml.responseType = 'arraybuffer';
+    xml.open('GET', '//cdn.imjad.cn/xxx/piano.wav', true);
+    xml.onload = function() {
+        // &#33719;&#21462;&#20108;&#36827;&#21046;&#25968;&#25454;&#24182;&#35299;&#30721;
+        ctx.decodeAudioData(
+            xml.response,
+            function(_data) {
+                data = _data;
+            },
+            function(e) {
+                alert(e.err);
+            }
+        );
+    };
+    xml.send();
+
+    function sleep (time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
+    // &#26681;&#25454;&#24179;&#22343;&#24459;&#24471;&#20986;&#30340;&#30456;&#37051;&#38899;&#35843;&#20043;&#38388;&#30340;&#39057;&#29575;&#27604;(&#36817;&#20284;&#20516;)
+    frequencyRatioTempered = 1.059463;
+
+    map = {
+        '((1))' : '36', '((#1))': '35', '((2))' : '34', '((#2))': '33', '((3))' : '32', '((4))': '31',
+        '((#4))': '30', '((5))' : '29', '((#5))': '28', '((6))' : '27', '((#6))': '26', '((7))': '25',
+        '(1)' : '24', '(#1)': '23', '(2)' : '22', '(#2)': '21', '(3)' : '20', '(4)': '19',
+        '(#4)': '18', '(5)' : '17', '(#5)': '16', '(6)' : '15', '(#6)': '14', '(7)': '13',
+        '1' : '12', '#1': '11', '2' : '10', '#2': '9', '3' : '8', '4': '7',
+        '#4': '6',  '5' : '5',  '#5': '4',  '6' : '3', '#6': '2', '7': '1',
+        '[1]' : '0',  '[#1]': '-1', '[2]' : '-2', '[#2]': '-3', '[3]' : '-4',  '[4]': '-5',
+        '[#4]': '-6', '[5]' : '-7', '[#5]': '-8', '[6]' : '-9', '[#6]': '-10', '[7]': '-11',
+        '[[1]]' : '-12', '[[#1]]': '-13', '[[2]]' : '-14', '[[#2]]': '-15', '[[3]]' : '-16', '[[4]]': '-17',
+        '[[#4]]': '-18', '[[5]]' : '-19', '[[#5]]': '-20', '[[6]]' : '-21', '[[#6]]': '-22', '[[7]]': '-23',
+    }
+
+    function play(k){
+        var i, v, frequencyRatio;
+
+        v = map[k];
+
+        // &#26681;&#25454;&#22522;&#20934;&#38899;C&#27714;&#24471;&#20854;&#20182;&#38899;&#35843;&#30456;&#23545;&#20110;&#23427;&#30340;&#39057;&#29575;&#27604;&#20363;
+        frequencyRatio = 1;
+        if(v > 0){
+            for (i = 0; i < v; i++) {
+                frequencyRatio /= frequencyRatioTempered;
+            }
+        }else{
+            for (i = 0; i > v; i--) {
+                frequencyRatio *= frequencyRatioTempered;
+            }
+        }
+
+        var bufferSource = ctx.createBufferSource();
+        bufferSource.buffer = data;
+        // &#36890;&#36807;&#25913;&#21464;&#38899;&#28304;&#25773;&#25918;&#36895;&#24230;&#30340;&#27604;&#29575;&#65292;&#35843;&#25972;&#38899;&#39640;
+        bufferSource.playbackRate.value = frequencyRatio;
+        bufferSource.connect(ctx.destination);
+        bufferSource.start(0);
+    }    
+
+    list.push(' ');
+    for (var i = 0; i < text.length; i++) {
+        switch(text[i]){
+            case ' ':
+            case '-':
+            case '\n':
+                list.push(' ');
+                break;
+            case '(':
+            case '[':
+                if(text[i+1] === '(' || text[i+1] === '['){
+                    if(text[i+2] === '#'){
+                        list.push(text[i] + text.substr(i+1, 5));
+                        i+=5;
+                    }else{
+                        list.push(text[i] + text.substr(i+1, 4));
+                        i+=4;
+                    }
+                }else if(text[i+1] === '#'){
+                    list.push(text[i] + text.substr(i+1, 3));
+                    i+=3;
+                }else{
+                    list.push(text[i] + text.substr(i+1, 2));
+                    i+=2;
+                }
+                break;
+            case '#':
+                list.push(text[i] + text.substr(i+1, 1));
+                i+=1;
+                break;
+            default:
+                list.push(text[i]);
+        }
+    }
+
+    for (var i = 0; i < list.length; i++) {
+        if(list[i] === ' '){
+            await sleep(duration);
+        }else{
+            // console.log(list[i]);
+            play(list[i]);
+            await sleep(duration);
+        }
+    }
+}
+</script>
       
 
       
@@ -211,6 +339,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -261,7 +400,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://janeswebsite.github.io/record/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://janeswebsite.github.io/2019/03/30/3/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -273,6 +412,25 @@
 </article>
 
   
+<nav id="article-nav">
+  
+    <a href="/2019/03/30/2-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          hexo插件测试
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/03/30/2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">双接口获取ip</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -339,7 +497,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
